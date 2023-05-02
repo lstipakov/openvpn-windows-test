@@ -14,7 +14,7 @@ param (
 
 $INSTANCE_TYPE = "t3.small"
 $IMAGE_ID = "ami-0acf3d8ed5bf3ec9d"
-$SECURITY_GROUPS = @("sg-053fdd33bdc1fd2b6", "sg-004c2f4af3ee2e7c8")
+$SECURITY_GROUPS = @("sg-053fdd33bdc1fd2b6", "sg-03f1c2ea7e5442e2f")
 $SUBNET_ID = "subnet-059c2f95ec662bd69"
 $REGION = "eu-west-1"
 
