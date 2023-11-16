@@ -35,6 +35,8 @@ remote-cert-tls server
 verb 3
 setenv UV_NOCOMP 1
 push-peer-info
+status status.txt
+cd .
 "@
 
 $PING4_HOSTS_1=@("10.194.1.1", "10.194.0.1")
