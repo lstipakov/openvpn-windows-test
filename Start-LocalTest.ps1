@@ -1,7 +1,7 @@
 #Requires -Version 7
 
 param (
-    [ValidateSet("Default", "OvpnDco", "Wintun", "TapWindows6", "All")]
+    [ValidateSet("Default", "OvpnDco", "TapWindows6", "All")]
     [string]$Driver = "Default",
 
     # use openvpn-gui and service to start/stop connections
@@ -323,19 +323,9 @@ Function Stop-OpenVPN([string]$ConfName) {
 }
 
 function Start-OpenVPN ([string] $ConfName, [string]$Conf, [string]$Driver, [string]$ErrorMessage) {
-    $windowsDriver = ""
-    switch ($Driver) {
-        "OvpnDco" {
-            $windowsDriver = "windows-driver ovpn-dco"
-        }
-        "TapWindows6" {
-            $windowsDriver = "windows-driver tap-windows6"
-        }
-        "wintun" {
-            $windowsDriver = "windows-driver wintun"
-        }
+    if ($Driver -eq "TapWindows6") {
+        $Conf += "`ndisable-dco"
     }
-    $Conf += "`n$windowsDriver"
     $log_file = "$ENV:UserProfile\OpenVPN\log\$ConfName.log"
 
     $CONFIG_DIR = "$ENV:UserProfile\OpenVPN\config"
@@ -451,7 +441,6 @@ function Start-SingleDriverTests([string]$Drv) {
 
 $results = @()
 if ($Driver -eq "All") {
-    # skip Wintun since it requires SYSTEM elevation
     foreach ($d in @("OvpnDco", "TapWindows6")) {
         $r = Start-SingleDriverTests $d
         $results += ,[System.Tuple]::Create($d, $r.Item1, $r.Item2)

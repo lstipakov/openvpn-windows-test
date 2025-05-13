@@ -5,7 +5,7 @@ param (
     [string]$SSH_KEY = "c:\Users\lev\.ssh\openvpn2_win_ta",
     [string]$MSI_PATH = "OpenVPN-2.6git-amd64.msi",
 
-    [ValidateSet("Default", "OvpnDco", "Wintun", "TapWindows6", "All")]
+    [ValidateSet("Default", "OvpnDco", "TapWindows6", "All")]
     [string]$Driver = "All",
 
     [string[]]$Tests = "All",
