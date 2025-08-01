@@ -57,9 +57,10 @@ dev tun
 proto tcp4
 remote $REMOTE
 port 51194
+setenv UV_WANT_DNS dns
 "@
-        Ping4Hosts=$PING4_HOSTS_1
-        Ping6Hosts=$PING6_HOSTS_1
+        Ping4Hosts=$PING4_HOSTS_1 + @("ping4.open.vpn")
+        Ping6Hosts=$PING6_HOSTS_1 + @("ping6.open.vpn")
     }
     "1a" = @{
         Title="tcp*6* / p2pm / top net30"
@@ -70,9 +71,10 @@ proto tcp6-client
 remote $REMOTE
 port 51194
 server-poll-timeout 10
+setenv UV_WANT_DNS dhcp
 "@
-        Ping4Hosts=$PING4_HOSTS_1
-        Ping6Hosts=$PING6_HOSTS_1
+        Ping4Hosts=$PING4_HOSTS_1 + @("ping4.open.vpn")
+        Ping6Hosts=$PING6_HOSTS_1 + @("ping6.open.vpn")
     }
     "2" = @{
         Title="udp / p2pm / top net30"
